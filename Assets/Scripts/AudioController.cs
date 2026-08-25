@@ -5,17 +5,13 @@ using FMOD.Studio;
 public class AudioController : MonoBehaviour
 {
     [SerializeField]
-    private EventReference testEvent;
+    private StudioEventEmitter emitter;
     
     void Start()
     {
-        var inst = RuntimeManager.CreateInstance(testEvent);
-        inst.set3DAttributes(transform.To3DAttributes());
-        inst.start();
-        inst.release();
+        emitter.Play();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
