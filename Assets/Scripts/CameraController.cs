@@ -1,11 +1,21 @@
 using UnityEngine;
-using UnityEngine.XR;
+using System;
+using Unity.VisualScripting;
 
 public class CameraController : MonoBehaviour
 {
-    public float sensitivity = 2f;
+    private float sensitivity = 2f;
     private float verticalRotation = 0f;
     private float horizontalRotation = 0f;
+
+    [SerializeField] private LayerMask layer;
+    private float rayMaxDistance = 60f;
+
+    private bool targetAcquired = false;
+    private bool lastTargetState = false;
+
+    public event Action OnTargetHit;
+    public event Action OnTargetAcquired;
     
     private void HandleMouseLook()
     {        
@@ -19,6 +29,15 @@ public class CameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0f);
     }
 
+    private void HandleAim()
+    {
+        targetAcquired = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit _hit, rayMaxDistance, layer);
+
+        if (targetAcquired && !lastTargetState)
+        {
+            OnTargetAcquired?.Invoke();
+        }
+    }
     
     void Start()
     {
@@ -29,11 +48,18 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         HandleMouseLook();
+        HandleAim();
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+        if (Input.GetMouseButton((int)MouseButton.Left) && targetAcquired)
+        {
+            OnTargetHit?.Invoke();
+        }
+
+        lastTargetState = targetAcquired;
     }
 }
