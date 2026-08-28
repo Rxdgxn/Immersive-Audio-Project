@@ -1,42 +1,65 @@
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
+using FMODUnity;
+using System.Collections;
 
 public class SimpleTargetController : MonoBehaviour
 {
     private CameraController cameraController = null;
+    [SerializeField] private StudioEventEmitter acquireEmitter;
+
+    private SpawnSound spawnSound;
 
     private Vector3 minBounds = new Vector3(-65f, 10f, -50f);
     private Vector3 maxBounds = new Vector3(38f, 30f, 20f);
 
-    private float maxDistance = 60f; // from camera
+    private float maxDistance = 40f; // from camera
 
     private void Start()
     {
         transform.position = GetRandomPosition();
+        spawnSound.PlaySound();
     }
 
     private void OnEnable()
     {
         cameraController = FindAnyObjectByType<CameraController>();
         cameraController.OnTargetHit += HandleTargetHit;
+        cameraController.OnTargetAcquired += HandleTargetAcquired;
+
+        spawnSound = FindAnyObjectByType<SpawnSound>();
     }
 
     private void OnDisable()
     {
         cameraController.OnTargetHit -= HandleTargetHit;
+        cameraController.OnTargetAcquired -= HandleTargetAcquired;
     }
 
     private void HandleTargetHit()
     {
-        Vector3 pos = GetRandomPosition();
+        StartCoroutine(Respawn());
+    }
 
+    private IEnumerator Respawn()
+    {
+        transform.position = new Vector3(-99f, -99f, -99f);
+
+        Vector3 pos = GetRandomPosition();
         while (Vector3.Distance(pos, cameraController.transform.position) >= maxDistance)
         {
             pos = GetRandomPosition();
         }
 
+        yield return new WaitForSeconds(3f);
+
         transform.position = pos;
+        spawnSound.PlaySound();
+    }
+
+    private void HandleTargetAcquired()
+    {
+        acquireEmitter.Play();
     }
 
     private Vector3 GetRandomPosition()

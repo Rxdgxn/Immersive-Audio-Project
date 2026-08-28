@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 259969837069981181}
   - component: {fileID: 603604496646270357}
   - component: {fileID: -849978280042800501}
+  - component: {fileID: 5446285998123598617}
   m_Layer: 6
   m_Name: ProtoTarget
   m_TagString: Untagged
@@ -126,6 +127,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef8ac95361c3c64dab43e34032533d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleTargetController
+  acquireEmitter: {fileID: 5446285998123598617}
+--- !u!114 &5446285998123598617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183815799953635208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 243928446
+      Data2: 1230755454
+      Data3: -2003923805
+      Data4: -1732774703
+    Path: event:/TargetAcquired
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &2945539222885658637
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,11 +208,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 243928446
-      Data2: 1230755454
-      Data3: -2003923805
-      Data4: -1732774703
-    Path: event:/TargetAcquired
+      Data1: -1451945536
+      Data2: 1305675085
+      Data3: -956386635
+      Data4: 2004329268
+    Path: event:/Spawn
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0

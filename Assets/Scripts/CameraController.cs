@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
+using FMODUnity;
+using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class CameraController : MonoBehaviour
 
     public event Action OnTargetHit;
     public event Action OnTargetAcquired;
+
+    [SerializeField] private StudioEventEmitter fireEmitter;
     
     private void HandleMouseLook()
     {        
@@ -55,9 +58,14 @@ public class CameraController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        if (Input.GetMouseButton((int)MouseButton.Left) && targetAcquired)
+        if (Input.GetMouseButtonDown(0))
         {
-            OnTargetHit?.Invoke();
+            fireEmitter.Play();
+
+            if (targetAcquired)
+            {
+                OnTargetHit?.Invoke();
+            }
         }
 
         lastTargetState = targetAcquired;
