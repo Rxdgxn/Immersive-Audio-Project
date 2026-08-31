@@ -21,7 +21,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -6084693568387870995}
   IsStream: 1
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: FMOD/project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639235189981566112
+  lastModified: 639237899507985357
   FileSizes:
   - Name: Desktop
-    Value: 2892096
+    Value: 2892512
   Exists: 1
 --- !u!114 &-3230864120181430959
 MonoBehaviour:
@@ -62,7 +62,7 @@ MonoBehaviour:
   Path: FMOD/project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639235189981576112
+  lastModified: 639237899507995418
   FileSizes:
   - Name: Desktop
     Value: 912
@@ -120,7 +120,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -3230864120181430959}
   cacheVersion: 131860
-  cacheTime: 639235189981576112
+  cacheTime: 639237899507995418
   SerializableEventsDict:
   - key: event:/TargetAcquired
     index: 0

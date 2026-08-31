@@ -9,6 +9,7 @@ public class SimpleTargetController : MonoBehaviour
     [SerializeField] private StudioEventEmitter acquireEmitter;
 
     private SpawnSound spawnSound;
+    private Sonification sonification;
 
     private Vector3 minBounds = new Vector3(-65f, 10f, -50f);
     private Vector3 maxBounds = new Vector3(38f, 30f, 20f);
@@ -19,6 +20,7 @@ public class SimpleTargetController : MonoBehaviour
     {
         transform.position = GetRandomPosition();
         spawnSound.PlaySound();
+        sonification.Play();
     }
 
     private void OnEnable()
@@ -28,6 +30,7 @@ public class SimpleTargetController : MonoBehaviour
         cameraController.OnTargetAcquired += HandleTargetAcquired;
 
         spawnSound = FindAnyObjectByType<SpawnSound>();
+        sonification = FindAnyObjectByType<Sonification>();
     }
 
     private void OnDisable()
@@ -38,6 +41,7 @@ public class SimpleTargetController : MonoBehaviour
 
     private void HandleTargetHit()
     {
+        sonification.Stop();
         StartCoroutine(Respawn());
     }
 
@@ -55,6 +59,7 @@ public class SimpleTargetController : MonoBehaviour
 
         transform.position = pos;
         spawnSound.PlaySound();
+        sonification.Play();
     }
 
     private void HandleTargetAcquired()
