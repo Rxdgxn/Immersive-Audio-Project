@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using FMODUnity;
+using TMPro;
 
 public class CameraController : MonoBehaviour
 {
@@ -23,6 +24,14 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private GameObject menuPanel;
     private bool isMenuOpen = false;
+
+    private float timeRemaining = 60f; // seconds
+    private int score = 0;
+    private bool roundOver = false;
+
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI scoreText;
     
     private void HandleMouseLook()
     {        
@@ -77,8 +86,32 @@ public class CameraController : MonoBehaviour
         Cursor.visible = isMenuOpen;
     }
 
+    private void UpdateUI()
+    {
+        int s = Mathf.FloorToInt(timeRemaining);
+        timerText.text = $"Timer: {s}s";
+
+        scoreText.text = $"Score: {score}";
+    }
+
     void Update()
     {
+        if (roundOver)
+        {
+            return;
+        }
+
+        timeRemaining -= Time.deltaTime;
+
+        if (timeRemaining <= 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            roundOver = true;
+        }
+
+        UpdateUI();
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleMenu();
@@ -100,6 +133,7 @@ public class CameraController : MonoBehaviour
             if (targetAcquired)
             {
                 OnTargetHit?.Invoke();
+                score++;
             }
         }
 
