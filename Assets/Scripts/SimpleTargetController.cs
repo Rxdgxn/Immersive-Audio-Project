@@ -18,7 +18,13 @@ public class SimpleTargetController : MonoBehaviour
 
     private void Start()
     {
-        transform.position = GetRandomPosition();
+        Vector3 pos = GetRandomPosition();
+        while (Vector3.Distance(pos, cameraController.transform.position) >= maxDistance)
+        {
+            pos = GetRandomPosition();
+        }
+
+        transform.position = pos;
         spawnSound.PlaySound();
         sonification.Play();
     }
@@ -55,7 +61,7 @@ public class SimpleTargetController : MonoBehaviour
             pos = GetRandomPosition();
         }
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         transform.position = pos;
         spawnSound.PlaySound();

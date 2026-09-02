@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour
     public event Action OnTargetAcquired;
 
     [SerializeField] private StudioEventEmitter fireEmitter;
+
+    private Sonification sonification;
     
     private void HandleMouseLook()
     {        
@@ -41,17 +43,31 @@ public class CameraController : MonoBehaviour
             OnTargetAcquired?.Invoke();
         }
     }
+
+    private void HandleSonification()
+    {
+        Vector3 local = transform.InverseTransformPoint(sonification.transform.position);
+
+        float azimuthError = Mathf.Atan2(local.x, local.z) * Mathf.Rad2Deg;         // -180..180
+        float horizontalDist = Mathf.Sqrt(local.x * local.x + local.z * local.z);
+        float elevationError = Mathf.Atan2(local.y, horizontalDist) * Mathf.Rad2Deg; // -90..90
+
+        sonification.UpdateParams(azimuthError, elevationError);
+    }
     
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        sonification = FindAnyObjectByType<Sonification>();
     }
 
     void Update()
     {
         HandleMouseLook();
         HandleAim();
+        HandleSonification();
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {

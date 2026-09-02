@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{65c5d0e3-3bed-49b5-a9fa-5e6862c6153e}">
+		<property name="name">
+			<value>ElevationError</value>
+		</property>
+		<relationship name="folder">
+			<destination>{c62266db-44a6-49c5-9859-07a0f8937030}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{b00b2047-ad2b-4288-b82d-6de9365ad463}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{b00b2047-ad2b-4288-b82d-6de9365ad463}">
+		<property name="minimum">
+			<value>-90</value>
+		</property>
+		<property name="maximum">
+			<value>90</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
