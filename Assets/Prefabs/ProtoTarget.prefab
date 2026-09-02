@@ -213,7 +213,7 @@ MonoBehaviour:
       Data2: 1300758563
       Data3: 1884552342
       Data4: -804932062
-    Path: event:/Sonification
+    Path: event:/SonificationEvent
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0

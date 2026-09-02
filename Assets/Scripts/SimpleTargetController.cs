@@ -12,16 +12,19 @@ public class SimpleTargetController : MonoBehaviour
     private Sonification sonification;
 
     private Vector3 minBounds = new Vector3(-65f, 10f, -50f);
-    private Vector3 maxBounds = new Vector3(38f, 30f, 20f);
+    private Vector3 maxBounds = new Vector3(38f, 20f, 20f);
 
-    private float maxDistance = 40f; // from camera
+    private float maxDistance = 20f; // from camera
+    private float minDistance = 15f;
 
     private void Start()
     {
         Vector3 pos = GetRandomPosition();
-        while (Vector3.Distance(pos, cameraController.transform.position) >= maxDistance)
+        float dist = Vector3.Distance(pos, cameraController.transform.position);
+        while (dist >= maxDistance && dist <= minDistance)
         {
             pos = GetRandomPosition();
+            dist = Vector3.Distance(pos, cameraController.transform.position);
         }
 
         transform.position = pos;
@@ -56,9 +59,11 @@ public class SimpleTargetController : MonoBehaviour
         transform.position = new Vector3(-99f, -99f, -99f);
 
         Vector3 pos = GetRandomPosition();
-        while (Vector3.Distance(pos, cameraController.transform.position) >= maxDistance)
+        float dist = Vector3.Distance(pos, cameraController.transform.position);
+        while (dist >= maxDistance && dist <= minDistance)
         {
             pos = GetRandomPosition();
+            dist = Vector3.Distance(pos, cameraController.transform.position);
         }
 
         yield return new WaitForSeconds(2f);

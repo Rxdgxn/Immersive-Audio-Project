@@ -1,7 +1,6 @@
 using UnityEngine;
 using System;
 using FMODUnity;
-using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
@@ -21,6 +20,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] private StudioEventEmitter fireEmitter;
 
     private Sonification sonification;
+
+    [SerializeField] private GameObject menuPanel;
+    private bool isMenuOpen = false;
     
     private void HandleMouseLook()
     {        
@@ -60,20 +62,37 @@ public class CameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        menuPanel.SetActive(false);
+
         sonification = FindAnyObjectByType<Sonification>();
+    }
+
+    private void ToggleMenu()
+    {
+        isMenuOpen = !isMenuOpen;
+
+        menuPanel.SetActive(isMenuOpen);
+
+        Cursor.lockState = isMenuOpen ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isMenuOpen;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleMenu();
+        }
+
+        if (isMenuOpen)
+        {
+            return;
+        }
+
         HandleMouseLook();
         HandleAim();
         HandleSonification();
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
         if (Input.GetMouseButtonDown(0))
         {
             fireEmitter.Play();

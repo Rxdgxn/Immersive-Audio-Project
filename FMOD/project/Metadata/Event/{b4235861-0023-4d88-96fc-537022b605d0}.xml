@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{b4235861-0023-4d88-96fc-537022b605d0}">
 		<property name="name">
-			<value>Sonification</value>
+			<value>SonificationEvent</value>
 		</property>
 		<property name="outputFormat">
 			<value>5</value>
@@ -57,7 +57,7 @@
 			<destination>{348c71ed-9a1e-4e61-afd2-ba0addcea20e}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{d3223c0e-5f9f-4429-9c4a-1fbb8dc5dc6d}</destination>
+			<destination>{19a53341-3c97-42b4-b12d-bf6135236286}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{2326cc10-49b4-4914-bf08-3651533c0279}" />
@@ -135,7 +135,6 @@
 		</property>
 		<relationship name="automationCurves">
 			<destination>{40d8009b-7439-482c-b325-08cffdc3fddb}</destination>
-			<destination>{c6ebbaae-d83d-4b6e-b4a7-f78a97f42e72}</destination>
 		</relationship>
 	</object>
 	<object class="Automator" id="{0d687ed7-1348-4a4b-b06a-48fe3e57f26b}">
@@ -149,6 +148,7 @@
 	<object class="MixerBusEffectChain" id="{dbff7eeb-81e6-4c8d-8ebf-a5e197cebcbd}">
 		<relationship name="effects">
 			<destination>{f2ad75ee-b5cc-4fe2-8aa3-cfd0addf9952}</destination>
+			<destination>{c7a435a8-cb53-4970-9064-0f313289699c}</destination>
 			<destination>{498c4d71-cb96-4fb6-b387-eed91719b4a8}</destination>
 		</relationship>
 	</object>
@@ -164,14 +164,6 @@
 			<destination>{074efd15-2dd6-4edb-aa28-08e8abf70198}</destination>
 		</relationship>
 	</object>
-	<object class="AutomationCurve" id="{c6ebbaae-d83d-4b6e-b4a7-f78a97f42e72}">
-		<relationship name="parameter">
-			<destination>{42eb74f6-bec4-42fa-8e9c-25c0c1c92566}</destination>
-		</relationship>
-		<relationship name="automationPoints">
-			<destination>{1921766d-ffee-4e2d-94ac-e4176195c14b}</destination>
-		</relationship>
-	</object>
 	<object class="AutomationCurve" id="{d5ec8226-ebc4-43c6-8f39-f4f91d2672e1}">
 		<relationship name="parameter">
 			<destination>{b00b2047-ad2b-4288-b82d-6de9365ad463}</destination>
@@ -183,6 +175,17 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{f2ad75ee-b5cc-4fe2-8aa3-cfd0addf9952}" />
+	<object class="MixerSend" id="{c7a435a8-cb53-4970-9064-0f313289699c}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{5d34a8c1-8ab5-41c0-87b7-1b42134cf7ac}</destination>
+		</relationship>
+	</object>
 	<object class="PluginEffect" id="{498c4d71-cb96-4fb6-b387-eed91719b4a8}">
 		<relationship name="plugin">
 			<destination>{c0ed6154-b9dd-4d88-891d-49b38fad8939}</destination>
@@ -193,10 +196,10 @@
 			<value>1.5254237288135641</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>0.536771774</value>
 		</property>
 		<property name="curveShape">
-			<value>0.245163083</value>
+			<value>0.0788746998</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{cf32c3ea-16ee-41ce-8a4d-02a3c3a24861}">
@@ -204,26 +207,18 @@
 			<value>-180</value>
 		</property>
 		<property name="value">
-			<value>-40</value>
+			<value>-25.2331848</value>
 		</property>
 		<property name="curveShape">
-			<value>-0.222521037</value>
+			<value>-0.0190933831</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{074efd15-2dd6-4edb-aa28-08e8abf70198}">
 		<property name="position">
-			<value>178.47457627118644</value>
+			<value>180</value>
 		</property>
 		<property name="value">
-			<value>-40</value>
-		</property>
-	</object>
-	<object class="AutomationPoint" id="{1921766d-ffee-4e2d-94ac-e4176195c14b}">
-		<property name="position">
-			<value>1.1362110311750615</value>
-		</property>
-		<property name="value">
-			<value>0</value>
+			<value>-25.2331848</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{a6dea633-8830-47e7-8267-2dc3a3b498ae}">
@@ -450,7 +445,7 @@
 			<value>DAMaxDist</value>
 		</property>
 		<property name="value">
-			<value>40</value>
+			<value>25</value>
 		</property>
 		<property name="curve">
 			<value>{(0.000000,0.000000)(1.000000,10000.000000)}</value>

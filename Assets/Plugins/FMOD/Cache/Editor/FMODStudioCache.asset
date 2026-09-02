@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8683951199747243333
+--- !u!114 &-7820722003685641936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Sonification/ElevationError
+  m_Name: parameter:/SonificationEvent/ElevationError
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
   Name: ElevationError
   StudioPath: 
@@ -24,7 +24,31 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &-7395071318736354162
+--- !u!114 &-7302466354459108344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SonificationEvent/AzimuthError
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
+  Name: AzimuthError
+  StudioPath: 
+  Min: -180
+  Max: 180
+  Default: 0
+  ID:
+    data1: 2078144391
+    data2: 519171298
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7172418576344411088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,25 +58,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Sonification
+  m_Name: event:/BGMusic
   m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
-  Path: event:/Sonification
+  Path: event:/BGMusic
   Guid:
-    Data1: -1272752031
-    Data2: 1300758563
-    Data3: 1884552342
-    Data4: -804932062
+    Data1: 895343332
+    Data2: 1322630457
+    Data3: 986316420
+    Data4: -329389249
   Banks:
   - {fileID: -6084693568387870995}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
-  Parameters:
-  - {fileID: -8683951199747243333}
-  - {fileID: 2047843174770441799}
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 8000
+  Length: 19500
 --- !u!114 &-6084693568387870995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,10 +90,10 @@ MonoBehaviour:
   Path: FMOD/project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639239640315405429
+  lastModified: 639239730472033287
   FileSizes:
   - Name: Desktop
-    Value: 2893696
+    Value: 7344288
   Exists: 1
 --- !u!114 &-3230864120181430959
 MonoBehaviour:
@@ -88,10 +110,10 @@ MonoBehaviour:
   Path: FMOD/project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639239640315420500
+  lastModified: 639239730472048350
   FileSizes:
   - Name: Desktop
-    Value: 1024
+    Value: 1380
   Exists: 1
 --- !u!114 &-2375055796951971687
 MonoBehaviour:
@@ -120,6 +142,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-864699270083412422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SonificationEvent
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SonificationEvent
+  Guid:
+    Data1: -1272752031
+    Data2: 1300758563
+    Data3: 1884552342
+    Data4: -804932062
+  Banks:
+  - {fileID: -6084693568387870995}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7820722003685641936}
+  - {fileID: -7302466354459108344}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,24 +189,27 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: 4377934277542608885}
   - {fileID: -2375055796951971687}
-  - {fileID: -7395071318736354162}
   - {fileID: 507975248078041369}
+  - {fileID: -864699270083412422}
+  - {fileID: -7172418576344411088}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6084693568387870995}
   StringsBanks:
   - {fileID: -3230864120181430959}
   cacheVersion: 131860
-  cacheTime: 639239640315420500
+  cacheTime: 639239730472048350
   SerializableEventsDict:
   - key: event:/TargetAcquired
     index: 0
   - key: event:/Fire
     index: 1
-  - key: event:/Sonification
-    index: 2
   - key: event:/Spawn
+    index: 2
+  - key: event:/SonificationEvent
     index: 3
+  - key: event:/BGMusic
+    index: 4
 --- !u!114 &507975248078041369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,31 +236,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
---- !u!114 &2047843174770441799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Sonification/AzimuthError
-  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorParamRef
-  Name: AzimuthError
-  StudioPath: 
-  Min: -180
-  Max: 180
-  Default: 0
-  ID:
-    data1: 2078144391
-    data2: 519171298
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Length: 198
 --- !u!114 &4377934277542608885
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,9 +28,6 @@
 		<relationship name="timeline">
 			<destination>{3af90a1c-ffa6-4fc8-a77b-dab2ebd64128}</destination>
 		</relationship>
-		<relationship name="parameters">
-			<destination>{cc93ebce-e746-45c7-b5be-4e7397de9e6c}</destination>
-		</relationship>
 		<relationship name="banks">
 			<destination>{416a6e2c-54e6-4e61-ae22-5fdb1b6aff38}</destination>
 		</relationship>
@@ -42,7 +39,7 @@
 	</object>
 	<object class="MasterTrack" id="{aaba9229-2862-49a5-b6da-a3a69bba7daf}">
 		<relationship name="modules">
-			<destination>{34288ff4-8d10-409a-bb4d-e2b6bcf59adc}</destination>
+			<destination>{286dfc5f-d6ab-4dad-8b64-7507d9f0181b}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{59a95e45-ba74-47b1-874c-87bf48511f02}</destination>
@@ -56,19 +53,14 @@
 			<destination>{6557d98d-e82e-4ebd-a96e-f0ee8bfc1d22}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{d3223c0e-5f9f-4429-9c4a-1fbb8dc5dc6d}</destination>
+			<destination>{610c4cd7-7240-46b2-87d7-43fd6fb743d3}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{8b6b0405-81e0-4e4c-83dc-1ea9a9560921}" />
 	<object class="MarkerTrack" id="{3a7413a6-966e-4e9f-a961-ec6493fc1eb3}" />
 	<object class="Timeline" id="{3af90a1c-ffa6-4fc8-a77b-dab2ebd64128}">
-		<property name="isProxyEnabled">
-			<value>false</value>
-		</property>
-	</object>
-	<object class="ActionSheet" id="{cc93ebce-e746-45c7-b5be-4e7397de9e6c}">
 		<relationship name="modules">
-			<destination>{34288ff4-8d10-409a-bb4d-e2b6bcf59adc}</destination>
+			<destination>{286dfc5f-d6ab-4dad-8b64-7507d9f0181b}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{59a95e45-ba74-47b1-874c-87bf48511f02}">
@@ -85,9 +77,12 @@
 			<destination>{d393f90a-4b1e-446c-a3c6-8c2d8c2b25b4}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{34288ff4-8d10-409a-bb4d-e2b6bcf59adc}">
-		<relationship name="sounds">
-			<destination>{9bfa7a2f-73b7-4130-b34c-59b6252fa47e}</destination>
+	<object class="SingleSound" id="{286dfc5f-d6ab-4dad-8b64-7507d9f0181b}">
+		<property name="length">
+			<value>0.19820861678004542</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{37737173-b583-4446-912d-7dd820b614ce}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{aaae4461-ac10-412d-9283-fa275753b456}">
@@ -99,17 +94,24 @@
 	<object class="MixerBusEffectChain" id="{dcb66425-058b-4efe-8bf2-a03770900e02}">
 		<relationship name="effects">
 			<destination>{ef836326-ef0a-416d-8fd2-984ff356177f}</destination>
+			<destination>{23e44b16-7004-4bb1-b3f2-cec626fb96c9}</destination>
 			<destination>{b4b8cc16-a3f1-40be-81a8-985138302c9b}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{92bc49d6-a040-4f0a-be28-57d3b943955c}" />
-	<object class="SingleSound" id="{9bfa7a2f-73b7-4130-b34c-59b6252fa47e}">
-		<relationship name="audioFile">
-			<destination>{37737173-b583-4446-912d-7dd820b614ce}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusFader" id="{0c92d6ff-80f4-425b-8262-708b5ef542b7}" />
 	<object class="MixerBusFader" id="{ef836326-ef0a-416d-8fd2-984ff356177f}" />
+	<object class="MixerSend" id="{23e44b16-7004-4bb1-b3f2-cec626fb96c9}">
+		<property name="level">
+			<value>0</value>
+		</property>
+		<property name="inputFormat">
+			<value>0</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{5d34a8c1-8ab5-41c0-87b7-1b42134cf7ac}</destination>
+		</relationship>
+	</object>
 	<object class="PluginEffect" id="{b4b8cc16-a3f1-40be-81a8-985138302c9b}">
 		<relationship name="plugin">
 			<destination>{97415668-24dd-4d56-b21e-0f5c4529fa79}</destination>
@@ -162,7 +164,6 @@
 		<property name="name">
 			<value>SourcePos</value>
 		</property>
-		<property name="value" />
 		<property name="dataType">
 			<value>-2</value>
 		</property>
@@ -171,7 +172,6 @@
 		<property name="name">
 			<value>OverallGain</value>
 		</property>
-		<property name="value" />
 		<property name="dataType">
 			<value>-1</value>
 		</property>
@@ -500,7 +500,6 @@
 		<property name="name">
 			<value>SimOutputs</value>
 		</property>
-		<property name="value" />
 		<property name="dataType">
 			<value>0</value>
 		</property>
@@ -517,7 +516,6 @@
 		<property name="name">
 			<value>DistRange</value>
 		</property>
-		<property name="value" />
 		<property name="dataType">
 			<value>-6</value>
 		</property>
