@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using FMODUnity;
 using TMPro;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
@@ -21,18 +22,93 @@ public class CameraController : MonoBehaviour
     [SerializeField] private StudioEventEmitter fireEmitter;
 
     private Sonification sonification;
-
-    [SerializeField] private GameObject menuPanel;
-    private bool isMenuOpen = false;
+    private SimpleTargetController simpleTargetController;
 
     private float timeRemaining = 60f; // seconds
     private int score = 0;
     private bool roundOver = false;
 
     [Header("UI")]
+    [SerializeField] private GameObject menuPanel;
+    private bool isMenuOpen = false;
+
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private Button retryButton;
     
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        menuPanel.SetActive(false);
+
+        sonification = FindAnyObjectByType<Sonification>();
+        simpleTargetController = FindAnyObjectByType<SimpleTargetController>();
+
+        retryButton.gameObject.SetActive(false);
+        retryButton.onClick.AddListener(HandleNewRound);
+    }
+
+    private void UpdateUI()
+    {
+        int s = Mathf.FloorToInt(timeRemaining);
+        timerText.text = $"Timer: {s}s";
+        scoreText.text = $"Score: {score}";
+    }
+
+    void Update()
+    {
+        if (roundOver)
+        {
+            return;
+        }
+
+        timeRemaining -= Time.deltaTime;
+
+        if (timeRemaining <= 0)
+        {
+            sonification.Stop();
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            
+            roundOver = true;
+            retryButton.gameObject.SetActive(true);
+
+            return;
+        }
+
+        UpdateUI();
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ToggleMenu();
+        }
+
+        if (isMenuOpen)
+        {
+            return;
+        }
+
+        HandleMouseLook();
+        HandleAim();
+        HandleSonification();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            fireEmitter.Play();
+
+            if (targetAcquired)
+            {
+                OnTargetHit?.Invoke();
+                score++;
+            }
+        }
+
+        lastTargetState = targetAcquired;
+    }
+
     private void HandleMouseLook()
     {        
         float mouseX = Input.GetAxis("Mouse X") * sensitivity;
@@ -65,16 +141,6 @@ public class CameraController : MonoBehaviour
 
         sonification.UpdateParams(azimuthError, elevationError);
     }
-    
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        menuPanel.SetActive(false);
-
-        sonification = FindAnyObjectByType<Sonification>();
-    }
 
     private void ToggleMenu()
     {
@@ -86,57 +152,16 @@ public class CameraController : MonoBehaviour
         Cursor.visible = isMenuOpen;
     }
 
-    private void UpdateUI()
+    private void HandleNewRound()
     {
-        int s = Mathf.FloorToInt(timeRemaining);
-        timerText.text = $"Timer: {s}s";
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
-        scoreText.text = $"Score: {score}";
-    }
+        retryButton.gameObject.SetActive(false);
+        timeRemaining = 60f;
+        score = 0;
+        roundOver = false;
 
-    void Update()
-    {
-        if (roundOver)
-        {
-            return;
-        }
-
-        timeRemaining -= Time.deltaTime;
-
-        if (timeRemaining <= 0)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            roundOver = true;
-        }
-
-        UpdateUI();
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            ToggleMenu();
-        }
-
-        if (isMenuOpen)
-        {
-            return;
-        }
-
-        HandleMouseLook();
-        HandleAim();
-        HandleSonification();
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            fireEmitter.Play();
-
-            if (targetAcquired)
-            {
-                OnTargetHit?.Invoke();
-                score++;
-            }
-        }
-
-        lastTargetState = targetAcquired;
+        StartCoroutine(simpleTargetController.Respawn());
     }
 }

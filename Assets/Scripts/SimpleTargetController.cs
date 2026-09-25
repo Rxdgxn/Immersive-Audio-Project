@@ -54,7 +54,7 @@ public class SimpleTargetController : MonoBehaviour
         StartCoroutine(Respawn());
     }
 
-    private IEnumerator Respawn()
+    public IEnumerator Respawn()
     {
         transform.position = new Vector3(-99f, -99f, -99f);
 
